@@ -1,7 +1,8 @@
 #pragma once
 
 #include "byte_stream.hh"
-
+#include <cstdint>
+#include <map>
 #include <string>
 
 class Reassembler
@@ -31,4 +32,16 @@ public:
 
   // How many bytes are stored in the Reassembler itself?
   uint64_t bytes_pending() const;
+
+private:
+  size_t next_index = 0; // the next ordered index,which will push to bytestream by writer
+  size_t unordered_bytes_size = 0;
+  std::map<size_t, std::string> unordered_bytes_buffer {}; // store unordered bytes
+  bool byte_stream_end = false;
+  size_t eof_index = 0;
+
+  // function:
+  void process_substr( uint64_t& first_index, std::string& data, Writer& output );
+
+  void remove_overlap( uint64_t& first_index, std::string& data );
 };
