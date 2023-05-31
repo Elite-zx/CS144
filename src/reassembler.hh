@@ -40,8 +40,8 @@ private:
   bool byte_stream_end = false;
   size_t eof_index = 0;
 
-  // function:
+  // function:let string legal
   void process_substr( uint64_t& first_index, std::string& data, Writer& output );
-
+  // make sure no overlapping in reassembler buffer
   void remove_overlap( uint64_t& first_index, std::string& data );
 };

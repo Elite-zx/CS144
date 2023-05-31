@@ -108,7 +108,7 @@ void Reassembler::remove_overlap( uint64_t& first_index, std::string& data )
         iter = unordered_bytes_buffer.erase( iter );
       } else {
         data += iter->second.substr( last_index - begin_index + 1 );
-        unordered_bytes_size -= last_index - begin_index + 1;
+        unordered_bytes_size -= unordered_bytes_buffer[begin_index].size();
         iter = unordered_bytes_buffer.erase( iter );
       }
     }
@@ -122,7 +122,7 @@ void Reassembler::remove_overlap( uint64_t& first_index, std::string& data )
         iter = unordered_bytes_buffer.erase( iter );
       } else {
         data = iter->second.substr( 0, first_index - begin_index ) + data;
-        unordered_bytes_size -= end_index - first_index;
+        unordered_bytes_size -= iter->second.size();
         iter = unordered_bytes_buffer.erase( iter );
         first_index = begin_index;
       }
