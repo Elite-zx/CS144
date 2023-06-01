@@ -2,7 +2,7 @@ Stanford CS 144 Networking Lab
 ==============================
 - [x] lab0
 - [x] lab1
-- [ ] lab2
+- [x] lab2
 - [ ] lab3
 
 
