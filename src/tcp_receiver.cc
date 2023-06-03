@@ -38,7 +38,7 @@ TCPReceiverMessage TCPReceiver::send( const Writer& inbound_stream ) const
     uint64_t next_expected_seq = inbound_stream.bytes_pushed() + 1;
     if ( inbound_stream.is_closed() ) // FIN
       ++next_expected_seq;
-    msg.ackno = zero_point + static_cast<uint32_t>( next_expected_seq ); // wrap
+    msg.ackno = Wrap32::wrap( next_expected_seq, zero_point ); // wrap
   }
   return msg;
 }

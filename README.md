@@ -3,7 +3,7 @@ Stanford CS 144 Networking Lab
 - [x] lab0
 - [x] lab1
 - [x] lab2
-- [ ] lab3
+- [x] lab3   
 
 
 These labs are open to the public under the (friendly) request that to
