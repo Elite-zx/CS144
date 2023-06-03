@@ -96,7 +96,7 @@ void TCPSender::push( Reader& outbound_stream )
             data_msg.payload ); // payload is shared_ptr
       bytes_sent_cnt += data_msg.payload.size();
 
-      /*set FIN flag if stream is empty but rwnd is not full*/
+      /*set FIN flag if stream is over but rwnd is not full*/
       if ( outbound_stream.is_finished() && bytes_sent_cnt < max_sent_volume ) {
         data_msg.FIN = true;
         _status = FIN_SENT;
