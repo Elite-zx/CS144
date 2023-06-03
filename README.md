@@ -18,7 +18,7 @@ sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa
 sudo apt update
 sudo apt install g++-12 -y
 ```
-![](image/Pasted%20image%2020230528211803.png)
+![](attachment/d6f4cf3e9c0ddf6dfec8cf56cdbf46a7.png)
 将minnow仓库上传到自己的仓库，参考[这个方法](https://stackoverflow.com/questions/10065526/github-how-to-make-a-fork-of-public-repository-private)
 如果你做的是2023年之前的版本，需要用到sponge仓库，那么我[这里](https://github.com/Elite-zx/CS144-sponge)有一份未被修改过的版本
 ## 1.2. Networking by hand
@@ -29,21 +29,21 @@ GET /hello HTTP/1.1
 Host: cs144.keithw.org
 Connection: close
 ```
-![](image/Pasted%20image%2020230527165845.png)
+![](attachment/c115d6890f5fd5aa7520dc617a5b121e.png)
 (Pretend to be a student at Stanford✌️)
 ```http
 GET /lab0/elitezx HTTP/1.1
 Host: cs144.keithw.org
 Connection: close
 ```
-![](image/Pasted%20image%2020230527173245.png)
+![](attachment/dfd50d27a92f6fa60d1b2f2a923902a8.png)
 ### 1.2.2. Send yourself an email
 这个实现在 _自顶向下_ 的实验中已经完成过了，就不再重复了
-![](image/Pasted%20image%2020230523204611.png)
+![](attachment/d23d0311f3b4833f4d77f9aba232d1a2.png)
 ### 1.2.3. Listening and connecting
 netcat监听一个端口， telnet 连接到一个端口使用telnet连接到一个端口，该端口必须处于监听状态
-![](image/Pasted%20image%2020230527175103.png)
-![](image/Pasted%20image%2020230527175111.png)
+![](attachment/254604b0f9b24b1052e329f52117eb1f.png)
+![](attachment/6da45053969b61df7a75cfb36704fc13.png)
 ## 1.3. Writing a network program using an OS stream socket
 ### 1.3.1. Let’s get started—fetching and building the starter code
 安装最新版的cmake，ubuntu22.04  follow [here](https://askubuntu.com/a/1157132/1681772)
@@ -52,18 +52,18 @@ cd minnow
 cmake -S . -B build
 cmake --build build
 ```
-![](image/Pasted%20image%2020230528212535.png)
+![](attachment/bc74865004fa7f18defa1fe09d61f59f.png)
 ### 1.3.2. Modern C++: mostly safe but still fast and low-level
 代码规范
 ### 1.3.3. Reading the Minnow support code
 Adress
-![](image/Pasted%20image%2020230528222024.png)
+![](attachment/7f7a17c918370d5a53fff8f0624c401c.png)
 file_descriptor
-![](image/Pasted%20image%2020230528223938.png)
+![](attachment/399585efdc594c98c39eee207e8cb94f.png)
 socket
-![](image/Pasted%20image%2020230528225318.png)
+![](attachment/a9b1e0847665ded2b05c50e9ede31e7d.png)
 TCPSocket
-![](image/Pasted%20image%2020230528222810.png)
+![](attachment/51aa482e91ac4069a40b0a3ef6a6f84d.png)
 ### 1.3.4. Writing webget
 根据提供的类，可以很轻松的写出来（10行够了，但完整和规范）。注意write接受string_view的对象，但是该类不能使用'+'运算符，因此用string代替。string_view和string的区别在于string_view只能被访问而不能被修改( refer to a constant contiguous sequence),，而string可以追加、删除和修改字符
 ```cpp
@@ -99,11 +99,11 @@ void get_URL( const string& host, const string& path )
 ```bash
 ./apps/webget cs144.keithw.org /hello
 ```
-![](image/Pasted%20image%2020230529094054.png)
+![](attachment/87b796b15c232a403d24ed3180cd473e.png)
 ```bash
 cmake --build build --target check_webget
 ```
-![](image/Pasted%20image%2020230529094112.png)
+![](attachment/70352ffb130b6bf7fbd2bad02b119435.png)
 ## 1.4. An in-memory reliable byte stream
 ### 1.4.1. target
 在 "An in-memory reliable byte stream" 这一小节中，文档要求你**实现一个可靠的字节流**。这个字节流需要满足以下几个条件：
@@ -240,7 +240,7 @@ uint64_t Reader::bytes_popped() const
 }
 ```
 ### 1.4.3. result
-![](image/Pasted%20image%2020230529104643.png) 
+![](attachment/a8993a0ccdbc79fc8603e6126bdda791.png) 
 # 2. lab1 stitching substrings into a byte stream
 ## 2.1. target
 将远程仓库的 `check1-startercode` 分支的更改合并到当前所在的main分支，重新cmake
@@ -254,9 +254,9 @@ cmake --build build
 TCP发送器将其字节流分割成短的段（子字符串，每个不超过约1460字节），以便它们每个都能装入一个数据报。但是，网络可能会重新排序这些数据报，或者丢弃它们，或者多次传送它们。接收器必须将这些段重新组装成它们开始时的连续字节流。
 
 在这个实验中，你将编写一个负责这种重组的数据结构：**一个Reassembler**。它将接收子字符串，由一串字节和该字符串在更大流中的第一个字节的索引组成。流的每一个字节都有它自己的唯一索引，从零开始并向上计数。
-![](image/Pasted%20image%2020230601201518.png)
+![](attachment/b93603f9efe81d5ff6627cb41ccc715c.png)
 ## 2.2. analyze
-![](image/Pasted%20image%2020230530091240.png)
+![](attachment/b9d0adf15b770596e7b145e3d3f2df50.png)
 首先理解内存限制的要求。ByteStream对象的capacity分为了两个部分，一个是用于字节流的buffer，用于存储重组好的有序字节流，这是对writer对象和reader对象而言的。一个是用于未重组的字节流的缓冲，可通过available_capacity()方法获取，这是reassembler对象而言的。因为capacity是固定的，意味着如果pop的频率太小，那么capacity被有序字节流填满，此时重组器reassembler会停止工作，因为它的存储空间available_capacity为0。
 
 其次，实现这个reassembler最大的难点在于：如何**处理重叠的子串**。比如first_unassemble_index(期望接受的第一个有序字节)是'a'，但是先后来了子串'bc'，'c'，这两个子串就要缓存在reassembler的内存空间中(大小为available capacity, 如果该值大于2的话)。我们需要在将c加入子串的时候，执行remove_overlapping操作，将这两个重叠子串合并为'bc'，这样确保reassembler中缓存空间中不存在重叠子串。换句话说，就是在新的子串要缓存时，在加入前先与缓存中重叠的子串执行合并操作，以确保加入后缓存中不存在重复子串，合并后bytes_pending（`unordered_bytes_size`）减去相应子串的大小。这样的目的是节省内存空间，并且在期望的有序字节达到`last_index + 1 == begin_index`时，也能快速的与缓存中的相邻子串合并然后通过writer的push函数push到reader的buffer中。
@@ -434,13 +434,13 @@ uint64_t Reassembler::bytes_pending() const
 
 ```
 ## 2.4. result
-![](image/Pasted%20image%2020230531160240.png)
+![](attachment/61b17337a7d88a508fbce358e642c62e.png)
 # 3. lab2 the TCP receiver
 ## 3.1. Translating between 64-bit indexes and 32-bit seqnos
-![](image/Pasted%20image%2020230601201245.png)
+![](attachment/0c490d98cf317a4773f7a4451f66c0c0.png)
 
 首先要解决的问题是，TCP有限的字节序列字段造成的有限字节序列范围进而导致的回绕问题，我们需要在永不会溢出的64位绝对序号和会发生回绕的32位相对序号之间实现转换，因为对重组器来说，字节流是从0开始的不会回绕的序列。此外，TCP随机的初始字节序号(ISN)为这个问题增加了难度
-![](image/Pasted%20image%2020230531154520.png)
+![](attachment/9f709e9806e18ae85d29faacc9785481.png)
 ### 3.1.1 wrap---absolute seqno to seqno
 把绝对序号转换为相对序号的wrap函数很简单，n的高32位表示绕了多少圈然后从0计数，带入这部分计算没有意义。因此截去n的高32位而将n的低32位与ISN相加即可得到目标相对序列（注释中有取余数的版本）
 ```cpp
@@ -470,7 +470,7 @@ uint64_t Wrap32::unwrap( Wrap32 zero_point, uint64_t checkpoint ) const
 ## 3.2. Implementing the TCP receiver
 ### 3.2.1 receive
 对收到的message,首先要判断是否是SYN握手信息，并在收到此信息之后进入数据交换阶段（tcp连接已建立），因此要有一个bool变量`after_handshaking`标志现在是否处于三次握手之后的状态。在收到SYN后，因为SYN被置1的包的序号是发送端的随机初始序号ISN，因此将zero_point置为该值以便后续将相对序号`seqno`转变为绝对序号`absolute_seqno`。（为了声明和赋值zero_point成员变量，要在Wrap32类中添加指定的默认构造函数(= default)，复制构造函数和重载赋值运算符（这两个必须同时实现））
-![](image/Pasted%20image%2020230601151721.png)
+![](attachment/9818e9d7cdd833e176a6dd96ca42a339.png)
 因为重组器对收到的字节流，从0编号，因此传递给reassembler的first_index要去除SYN所占的序号(如果存在SYN)，用`first_index = absolute_seqno + message.SYN + -1`就可以一步解决（boolean类型为true时，本质是为1，反正false为0）
 因此receive的实现如下
 ```cpp
@@ -497,7 +497,7 @@ void TCPReceiver::receive( TCPSenderMessage message, Reassembler& reassembler, W
 TCP的接受端要向发送端反馈信息，实验的要求比实际情况是简化了的（不用为接受端的包生成随机初始序号），包括确认信息ackno和用于流量控制的窗口大小信息（rwnd, receiver window）window_size
 - ackno：期望收到的下一个字节的序号（相对序号）
 - window_size：结合lab1和下图，可以看出window_size就是重组器用于排序的存储空间(storage)，可直接通过writer的available_capacity函数获得
-![|575](image/Pasted%20image%2020230519163302.png)
+![](attachment/a77e7e0ef331e6368c1bc5ff65569cd9.png)
 因此send函数的实现如下：
 根据文档描述
 >in TCP the SYN (beginning-of-stream) and FIN (end-of-stream) control flags are assigned sequence numbers. Each of these occupies one sequence number. (The sequence number occupied by the SYN flag is the ISN.) Each byte of data in the stream also occupies one sequence number.
@@ -527,9 +527,9 @@ TCPReceiverMessage TCPReceiver::send( const Writer& inbound_stream ) const
 
 ```
 ## 3.3. result
-![](image/Pasted%20image%2020230601152144.png)
+![](attachment/4ca2b48b339cd80c6d86e1d24d06da1e.png)
 # 4. lab3 the TCP sender
-![](image/Pasted%20image%2020230601201245.png)
+![](attachment/0c490d98cf317a4773f7a4451f66c0c0.png)
 下面讲讲实现过程中遇到的难点和debug过程
 ## 4.1tcp_sender.hh
 [tcp_sender.hh](https://github.com/Elite-zx/CS144/blob/main/src/tcp_sender.hh)
@@ -545,15 +545,15 @@ TCPReceiverMessage TCPReceiver::send( const Writer& inbound_stream ) const
 即**有可用空间时在段中搭载 FIN**（Piggyback FIN in segment when space is available）
 当outbound_stream中的数据均打包到data_seg中，stream is finished, 而接受窗口应该至少有一个空余字节(space is available))，此时要将最后一个数据包的FIN置1 (这里要多占一个字节）
 看下图的测试用例，窗口的大小为8,而剩下的数据大小仅为4 bytes, 因此足以让最后一个数据包设置FIN位
-![](image/Pasted%20image%2020230603153618.png)
+![](attachment/d9d31cacab2e25fe8ec17789df9afc85.png)
 
 - 单独的一个FIN flag 包，payload为0
 这种情况出现中，流传输完毕后，接受窗口被填满，此时**没有多余空间为最后一个数据包添加FIN位**，因此发送方在接受方的接受窗口有空余时，再发送一个单独的FIN包
 看下图的测试用例，数据包正好占用了7个空间，填满了当前窗口 rwnd = 0 ，因此此时不能设置FIN位。在后续收到新的rwnd= 1的后，接受方知道有空余位置了，发送一个单独的FIN包
-![](image/Pasted%20image%2020230603153427.png)
+![](attachment/780242ece281a0ca811c9b4811ea69dc.png)
 
 ### 4.2.2 debug
 遇到了一个很奇怪的测试用例"SYN+FIN"，这个用例要求我们同时设置SYN位和FIN位。首先发送方收到来自接受方的一个握手之前的ackno为nullopt的数据包(可能原因：网络延迟，旧链接断开之前的包在新链接建立之前达到)，接着发送方流向reader的流就关闭了，没有传出任何数据就关闭了。此时要求我们设置SYN+FIN的flag包，不包含任何数据负载。我只能在设置syn时检测流是否关闭从而通过这个测试用例，因为确实不知道什么情况下会有这样的包。
-![](image/Pasted%20image%2020230603113030.png)
+![](attachment/fe364c4d14e753567f3b654f7ea523e5.png)
 4.3. result
-![](image/Pasted%20image%2020230603145625.png)
+![](attachment/f9b40071ddfcc3d470d363c88538b467.png)
