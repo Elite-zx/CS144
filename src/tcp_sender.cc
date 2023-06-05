@@ -49,7 +49,7 @@ void TCPSender::fill_seg_header( TCPSenderMessage seg )
   next_seqno += seg.sequence_length(); // update next_seqno
   _sequence_numbers_in_flight_cnt += seg.sequence_length();
 
-  seg_ready_que.push( seg );          // ready to send
+  seg_ready_que.emplace( seg );          // ready to send
   seg_outstanding_que.emplace( seg ); // prepare for retransmission
 
   if ( !_timer.isActivated() ) {
